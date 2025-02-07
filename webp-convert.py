@@ -31,11 +31,19 @@ def convert_to_webp(input_path, output_folder, quality=80):
     except Exception as e:
         print(f"❌ Erreur lors de la conversion : {e}")
 
-# 📌 Vérifie si une URL a été passée en argument
-if len(sys.argv) > 1:
-    input_path = sys.argv[1]
-else:
-    input_path = input("🔹 Entrez l'URL de l'image ou le chemin du fichier local : ").strip()
+# 📌 Boucle pour permettre plusieurs conversions
+while True:
+    if len(sys.argv) > 1:
+        input_path = sys.argv[1]  # Utilisation d'un argument en ligne de commande (si fourni)
+    else:
+        input_path = input("🔹 Entrez l'URL de l'image ou le chemin du fichier local : ").strip()
 
-# 📌 Lancer la conversion
-convert_to_webp(input_path, OUTPUT_FOLDER)
+    # 📌 Lancer la conversion
+    convert_to_webp(input_path, OUTPUT_FOLDER)
+
+    # 📌 Demander si l'utilisateur veut convertir une autre image
+    repeat = input("🔄 Voulez-vous convertir une autre image ? (o/n) : ").strip().lower()
+    if repeat != "o":
+        print("👋 Fin du programme. Merci d'avoir utilisé l'outil de conversion !")
+        break
+        
